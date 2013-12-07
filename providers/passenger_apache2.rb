@@ -37,9 +37,13 @@ action :before_compile do
   r = new_resource
   new_resource.restart_command do
     directory "#{r.application.path}/current/tmp" do
+      owner r.application.owner
+      group r.pplication.group
       recursive true
     end
     file "#{r.application.path}/current/tmp/restart.txt" do
+      owner r.application.owner
+      group r.pplication.group      
       action :touch
     end
   end unless new_resource.restart_command
